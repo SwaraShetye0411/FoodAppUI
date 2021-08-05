@@ -1,21 +1,57 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {createStackNavigator} from "@react-navigation/stack";
+import {NavigationContainer} from "@react-navigation/native";
 
-export default function App() {
+import Tabs from "./navigation/tabs";
+import {Home, Restaurant, OrderDelivery, ChatRoomScreen, ChatRoom, ChatMessage, ContactsScreen} from "./screens";
+
+// import { withAuthenticator } from 'aws-amplify-react-native';
+
+// import Amplify from 'aws-amplify';
+// import config from './src/aws-exports';
+// Amplify.configure(config);
+// import Amplify from 'aws-amplify'
+// import config from './src/aws-exports'
+// Amplify.configure(config)
+
+
+const Stack = createStackNavigator();
+
+function App () {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator
+            screenOptions={{
+              headerShown: false
+            }}
+            initialRouteName={"Home"}
+        >
+          <Stack.Screen name="Home" component={Tabs} />
+          <Stack.Screen name="Restaurant" component={Restaurant} />
+          <Stack.Screen name="OrderDelivery" component={OrderDelivery} />
+          {/* <Stack.Screen 
+            name="ChatRoomScreen" 
+            component={ChatRoomScreen}  
+          />
+          <Stack.Screen 
+            name="ChatRoom" 
+            component={ChatRoom}  
+            options={{title: 'Chat Room'}}
+          />
+          <Stack.Screen 
+            name="ChatMessage" 
+            component={ChatMessage}  
+            options={{title: 'Chat Message'}}
+          />
+          <Stack.Screen 
+            name="ContactsScreen" 
+            component={ContactsScreen}  
+            options={{title: 'Contacts'}}
+          /> */}
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// export default withAuthenticator(App);
+export default App;
